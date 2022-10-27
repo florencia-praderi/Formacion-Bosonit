@@ -92,10 +92,10 @@ console.log(ciudadesNoCapitales2);
 const roundedResult = (number, decimal) =>{
    return parseFloat(Math.round(number * 100) / 100).toFixed(decimal);
 }
-console.log(roundedResult(500.9856, 4))
+console.log(roundedResult(500.9856, 3))
 //No encontré la forma de no utilizar toFixed.
 
-//******VER - Ejercicio 7 
+//Ejercicio 7 
 //Crea una función que retorne los campos de un objeto que equivalgan a un valor “falsy” después de ser ejecutados por una función 
 //específica. La función debe tener dos parámetros:
 //Primer parámetro es un objeto con x número de campos y valores
@@ -104,28 +104,20 @@ console.log(roundedResult(500.9856, 4))
 //const result = returnFalsyValues({ a: 1, b: '2', c: 3 }, x => typeof x === 'string')
 //console.log(result); // {a: 1, c: 3}
 
+const returnFalsy = (obj, func) =>{
+  let obj2 = {};
+  let values = Object.values(obj);
+  let filteredValues = values.filter(func);
+  for (const key in obj){
+    if(filteredValues.includes(obj[key])){
+      Object.assign(obj2, {[key]: obj[key]})
+    }
+  }
+  return obj2;
+}
+let result = returnFalsy({ a: 1, b: '2', c: 3, d: '8' }, x => typeof x === 'string')
+console.log(result)
 
-//const typeOf = function returnTypeOf(x) {
-//  if(typeof(x) === 'string') {
-//    console.log('x is a string')
-//  } else if (typeof(x) === 'number'){
-//    console.log('x is a number')
-//  } else{
-//    console.log('x is another')
-//   }
-//  }
-//console.log(typeOf(88))
-
-//function returnFalsyValues(obj, typeOf){
-//   obj = {}
-//  if(typeOf == 'number'){
-//      return 'obj'
-//  }
-// else{
-//  return 'nada'
-// }
-//}
-//console.log(typeOf({a: '1', b: 2, c:8}))
 
 //Ejercicio 8
 //Crea una función que convierta un número de bytes en un formato con valores legibles 
@@ -153,13 +145,61 @@ function fromBytesToFormattedSizeUnits(bytes, digits){
 
 console.log(fromBytesToFormattedSizeUnits(900000))
 
-//Ejercicio 9
+//Ejercicio 9************VER
 //Crea una función que a partir de un objeto de entrada, retorne un objeto asegurándose que las claves del objeto estén en lowercase.
 //La función debe tener un objeto como único parámetro.
 //Ejemplo de uso de la función:
 //const myObject = { NamE: 'Charles', ADDress: 'Home Street' };
 //const myObjLowercase = toLowercaseKeys(myObject);
 //console.log(myObjLowercase); // { name: 'Charles', address: 'Home Street' }
+
+
+const toLowercaseKeys = (obj) =>{
+  let objKeys = Object.keys(obj);
+  let objLC = objKeys.reduce((obj2, key) => {
+    if (obj2[key]){
+      return obj2[key].toLowerCase();
+    } else {
+      return obj[key]
+    }
+  }, {})
+  return objLC
+}
+
+console.log(toLowercaseKeys({ NamE: 'Charles', ADDress: 'Home Street' }))
+
+//Ejercicio 10
+//Crea una función que elimine las etiquetas html o xml de un string.
+//La función debe tener un string como único parámetro.
+//Ejemplo de uso de la función:
+//const result = removeHTMLTags('<div><span>lorem</span> <strong>ipsum</strong></div>');
+ 
+//console.log(result); // lorem ipsum
+
+const removeHtmlTags = (str) =>{
+  return str.replace(/<[^>]*>/g, "");
+}
+
+console.log(removeHtmlTags('<div><span>lorem</span> <strong>ipsum</strong></div>'))
+
+//Ejercicio 11 ************VER
+//Crea una función que tome un array como parametro y lo divida en arrays nuevos con tantos elementos como sean especificados.
+//La función debe tener dos parámetros:
+//El primer parámetro es el array entero que se quiere dividir.
+//El segundo parámetro es el número de elementos que deben tener los arrays en los que se divida el array original del primer parámetro.
+//Ejemplo de uso de la función:
+//const result = splitArrayIntoChunks([1, 2, 3, 4, 5, 6, 7], 3);
+//console.log(result); // [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7 ] ]
+
+const splitArray = (arr, elements) =>{
+
+  let arrToSplit = arr.toString().replace(',', '')
+  let splitResult = arrToSplit.split([','], [elements])
+  return splitResult
+}
+console.log(splitArray([1, 2, 3, 4, 5, 6, 7], 6))
+
+
 
 
 
