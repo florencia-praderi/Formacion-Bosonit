@@ -12,6 +12,7 @@ const arrNames = [
 const obtenerObj = (id) => {
     return arrNames[id-1];
 }  
+console.log('Ejercicio 1')
 console.log(obtenerObj(3));
 
 //Ejercicio 2
@@ -20,6 +21,7 @@ console.log(obtenerObj(3));
 const arrDirty = [NaN, 0, 5, false, -1, '',undefined, 3, null, 'test'];
 
 const arrClean = arrDirty.filter(Boolean);
+console.log('Ejercicio 2')
 console.log(arrClean);
 
 //Ejercicio 3
@@ -35,6 +37,7 @@ const arrCities = [
   ];
 
 const ciudadesNoCapitales = arrCities.filter(ciudad => ciudad.capital == false);
+console.log('Ejercicio 3')
 console.log(ciudadesNoCapitales);
 
 //Ejercicio 4
@@ -49,7 +52,9 @@ const common2 = arrNumber2.filter(x=> arrNumber3.includes(x))
 const arrCommon = common1.concat(common2)
 
 const arrIntersection = [...new Set(arrCommon)]
+console.log('Ejercicio 4')
 console.log(arrIntersection);
+
 
 //Ejercicio 5
 //Dado un array de ciudades, sacar en un nuevo array las ciudades no capitales con unos nuevos parámetros que sean city y isSpain. 
@@ -70,11 +75,13 @@ let ciudadesNoCapitales2 = arrCities2
 .map(ciudad => {
     return {
         city: ciudad.city,
-        isSpain:ciudad.country == 'Spain' ? true : false
+        isSpain:ciudad.country == 'Spain' 
         }
 });
 
+console.log('Ejercicio 5')
 console.log(ciudadesNoCapitales2);
+console.log(arrCities2)
 
 //Ejercicio 6
 //Crea una función que redondee un número float a un número específico de decimales. 
@@ -90,10 +97,10 @@ console.log(ciudadesNoCapitales2);
 //console.log(roundedResult); // 1.123457
 
 const roundedResult = (number, decimal) =>{
-   return parseFloat(Math.round(number * 100) / 100).toFixed(decimal);
+   return parseFloat((Math.round(number * 100)/100)).toFixed(decimal);
 }
-console.log(roundedResult(500.9856, 3))
-//No encontré la forma de no utilizar toFixed.
+console.log('Ejercicio 6')
+console.log(roundedResult(6555.89995, 4))
 
 //Ejercicio 7 
 //Crea una función que retorne los campos de un objeto que equivalgan a un valor “falsy” después de ser ejecutados por una función 
@@ -116,8 +123,8 @@ const returnFalsy = (obj, func) =>{
   return obj2;
 }
 let result = returnFalsy({ a: 1, b: '2', c: 3, d: '8' }, x => typeof x === 'string')
+console.log('Ejercicio 7')
 console.log(result)
-
 
 //Ejercicio 8
 //Crea una función que convierta un número de bytes en un formato con valores legibles 
@@ -140,12 +147,13 @@ function fromBytesToFormattedSizeUnits(bytes, digits){
     let i = Math.floor( Math.log(bytes) / Math.log(1000)),
     sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     digits = 3;
-    return ( bytes / Math.pow(1000, i).toPrecision(3)*1 + ' ' + sizes[i])
+    return ( bytes / Math.pow(1000, i).toPrecision(digits)*1 + ' ' + sizes[i])
 }
 
+console.log('Ejercicio 8')
 console.log(fromBytesToFormattedSizeUnits(900000))
 
-//Ejercicio 9************VER
+//Ejercicio 9
 //Crea una función que a partir de un objeto de entrada, retorne un objeto asegurándose que las claves del objeto estén en lowercase.
 //La función debe tener un objeto como único parámetro.
 //Ejemplo de uso de la función:
@@ -155,18 +163,17 @@ console.log(fromBytesToFormattedSizeUnits(900000))
 
 
 const toLowercaseKeys = (obj) =>{
-  let objKeys = Object.keys(obj);
-  let objLC = objKeys.reduce((obj2, key) => {
-    if (obj2[key]){
-      return obj2[key].toLowerCase();
-    } else {
-      return obj[key]
-    }
-  }, {})
-  return objLC
+  let resultLC = {};
+  Object.entries(obj).forEach(([key, value]) => {
+    const newObject = {[key.toLowerCase()]: value}
+    resultLC = {...resultLC, ...newObject}
+  });
+  console.log(resultLC);
 }
 
+console.log('Ejercicio 9')
 console.log(toLowercaseKeys({ NamE: 'Charles', ADDress: 'Home Street' }))
+
 
 //Ejercicio 10
 //Crea una función que elimine las etiquetas html o xml de un string.
@@ -180,9 +187,10 @@ const removeHtmlTags = (str) =>{
   return str.replace(/<[^>]*>/g, "");
 }
 
+console.log('Ejercicio 10')
 console.log(removeHtmlTags('<div><span>lorem</span> <strong>ipsum</strong></div>'))
 
-//Ejercicio 11 ************VER
+//Ejercicio 11 
 //Crea una función que tome un array como parametro y lo divida en arrays nuevos con tantos elementos como sean especificados.
 //La función debe tener dos parámetros:
 //El primer parámetro es el array entero que se quiere dividir.
@@ -193,11 +201,16 @@ console.log(removeHtmlTags('<div><span>lorem</span> <strong>ipsum</strong></div>
 
 const splitArray = (arr, elements) =>{
 
-  let arrToSplit = arr.toString().replace(',', '')
-  let splitResult = arrToSplit.split([','], [elements])
-  return splitResult
+  let count = 0;
+  let result = [];
+  while (count<arr.length){
+    result.push(arr.slice(count, elements+count))
+    count+= elements
+  }
+  return result;
 }
-console.log(splitArray([1, 2, 3, 4, 5, 6, 7], 6))
+console.log('Ejercicio 11')
+console.log(splitArray([1, 2, 3, 4, 5, 6, 7], 2))
 
 
 
