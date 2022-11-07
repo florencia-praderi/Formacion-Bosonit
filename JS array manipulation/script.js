@@ -75,27 +75,25 @@ const users = [
     { id: '2', firstname: 'Morty', lastname: 'Smith' },
 ];
 
-function updateUsername (arr, id, name){
-    //for(const user of users){
-    //    if(user.firstname === name){
-    //        return firstname
-    //    }
-    //    else if(user.firstname !== name){
-    //        return name
-    //    }
-    //}
-    let newArr = arr
-    .find(name=> arr.includes(name))
-    //.map(user=>{
-    //    return {
-    //        id: user.id,
-    //        firstname: name,
-    //        lastname: user.lastname
-    //    }
-    //})
-    return newArr
-}
+function updateUsername (users, id, name){
+    let newArr;
+    for(let i= 0; i < users.length; i++){
+        if(users.firstname === name){
+            return {
+                id: users.id,
+                firstname: users.firstname,
+                lastname: users.lastname
+        }}
+        else if(users.firstname !== name){
+            return {
+                id: id,
+                firstname: name,
+                lastname: users.lastname,
+        }
+    }
+}}
 console.log('Ejercicio 5:')
+console.log(updateUsername(users, '2', 'Morty'))
 console.log(updateUsername(users, '1', 'Tiny Rick'))
 
 //Ejercicio 6
@@ -107,14 +105,13 @@ const basket = [
     { id: '3', name: 'UltraBall', shippingCost: 5 },
 ];
 
-function checkCost(arr,elem){
-    let result = basket.some(elem=> elem.shippingCost>0)
-    return result
+function check (basket){
+    const checkCost = (shippingCost) => {shippingCost > 0};
+    return basket.some(checkCost);   
 }
-console.log(basket.every(checkCost))
 
 console.log('Ejercicio 6:')
-checkCost(basket, 'shippingCost')
+console.log(check(basket))
 
 //Ejercicio 7
 //Dado un array de humanos, escriba una función que devuelva un ciempiés humano (como string) y que puede elegir el símbolo del conector. 
@@ -128,12 +125,6 @@ console.log('Ejercicio 7:')
 console.log(convert(['mother', 'son', 'father'], '-'))
 console.log(convert(['aunt', 'grandma', 'uncle'], '**'))
 
-//Ejercicio 8
-// Crear un array nuevo a partir de otros: concat, operador de propagación (spread operator), parámetros rest (rest params), 
-//sort simple y flat. Dadas varias matrices, cree una nueva y ordénela.
-
-
-
 
 //Ejercicio 9
 //Ordenar un array por una propiedad: sort. Dado un array de productos, escriba una función para ordenarla por una propiedad variable. 
@@ -145,9 +136,9 @@ const products = [
     { name: 'lego Star Wars', category: 'toys' },
 ];
 
-function order(arr = [], prop){
+function order(arr, prop){
     let result;
-    if(prop='name'){
+    if(prop=='name'){
         result = arr.sort((a, b)=>{
         if(a.name > b.name){
             return 1
@@ -159,7 +150,7 @@ function order(arr = [], prop){
     })
     return result
     }
-    if(prop='category'){
+    if(prop=='category'){
         result = arr.sort((a, b)=>{
             if(a.category > b.category){
                 return 1
@@ -173,8 +164,8 @@ function order(arr = [], prop){
     }
 }
 console.log('Ejercicio 9:')
-console.log(order(products), 'name')
-console.log(order(products), 'category')
+console.log(order(products, 'name'))
+console.log(order(products,'category'))
 
 //Ejercicio 10
 //Dado un array de números, escriba una función que devuelva 
@@ -197,4 +188,4 @@ function sumaTotal(arr){
     return result
 }
 console.log('Ejercicio 12:')
-console.log(sumaTotal([5, 11, 4, 18]))
+//console.log(sumaTotal([5, 11, 4, 18]))
